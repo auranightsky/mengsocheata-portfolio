@@ -11,11 +11,11 @@ import {
   Linkedin,
   Mail,
   Menu,
-  Orbit,
+  MessageSquareText,
+  ScanEye,
   Sparkles,
   Target,
 } from "lucide-react";
-import neuralStudy from "@/assets/neural-study.jpg";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -45,6 +45,8 @@ const currentIcons = {
   brain: BrainCircuit,
   target: Target,
 } satisfies Record<IconName, typeof GraduationCap>;
+
+const researchIcons = [BrainCircuit, MessageSquareText, ScanEye];
 
 function ScrollProgress() {
   const [progress, setProgress] = useState(0);
@@ -122,15 +124,15 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section id="top" className="page-shell relative grid min-h-[min(820px,92vh)] items-center gap-12 pb-16 pt-32 lg:grid-cols-[1.15fr_.85fr] lg:pb-24 lg:pt-28">
-      <div className="relative z-10 max-w-3xl">
+    <section id="top" className="hero-section page-shell relative flex min-h-[min(820px,92vh)] items-center pb-20 pt-32 lg:pb-28 lg:pt-28">
+      <div className="relative z-10 max-w-4xl">
         <div className="hero-enter hero-delay-1 flex items-center gap-3 text-sm font-semibold text-muted-foreground">
           <span className="status-dot" aria-hidden="true" />
           <span>Student · Pusan National University</span>
         </div>
         <h1 className="hero-enter hero-delay-2 mt-7 font-display text-5xl font-semibold leading-[1.04] text-foreground sm:text-6xl lg:text-7xl xl:text-[5.2rem]">
           Meng Socheata
-          <span className="mt-2 block gradient-text">Deep Learning Researcher</span>
+          <span className="mt-3 block gradient-text">Deep Learning Research</span>
         </h1>
         <p className="hero-enter hero-delay-3 mt-7 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
           {portfolioData.personal.intro}
@@ -142,30 +144,12 @@ function Hero() {
             </a>
           </Button>
           <Button variant="soft" size="xl" asChild>
-            <a href="#contact">Get in Touch</a>
+            <a href="#contact">Contact Me</a>
           </Button>
         </div>
       </div>
-      <div className="hero-enter hero-delay-5 relative mx-auto w-full max-w-lg lg:justify-self-end" aria-hidden="true">
-        <div className="hero-visual-frame">
-          <img
-            src={neuralStudy}
-            alt=""
-            className="aspect-[6/5] w-full object-cover"
-            width="1200"
-            height="1008"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-x-5 bottom-5 flex items-center justify-between rounded-lg border border-border/70 bg-surface-frosted px-4 py-3 backdrop-blur-md">
-            <div>
-              <p className="text-xs font-semibold uppercase text-muted-foreground">Current focus</p>
-              <p className="mt-1 text-sm font-semibold text-foreground">Learning how systems learn</p>
-            </div>
-            <Orbit className="size-5 text-primary" />
-          </div>
-        </div>
-        <span className="ambient-ring" />
-      </div>
+      <div className="hero-ambient" aria-hidden="true" />
+      <div className="hero-orbit hero-enter hero-delay-5" aria-hidden="true"><span /><span /><span /></div>
       <a href="#currently" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-semibold uppercase text-muted-foreground md:flex">
         Scroll to explore <ArrowDownRight className="size-4" />
       </a>
@@ -208,10 +192,11 @@ function Research() {
         {portfolioData.researchInterests.map((interest, index) => (
           <Reveal key={interest.area} delay={index * 80} className="research-card group">
             <div className="flex items-start justify-between">
-              <span className="research-index">{interest.index}</span>
+              <div className="research-icon">{(() => { const Icon = researchIcons[index] ?? BrainCircuit; return <Icon />; })()}</div>
               <ArrowDownRight className="size-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </div>
-            <h3 className="mt-10 font-display text-2xl font-semibold text-foreground">{interest.area}</h3>
+            <span className="research-index mt-7 block">{interest.index}</span>
+            <h3 className="mt-2 font-display text-2xl font-semibold text-foreground">{interest.area}</h3>
             <p className="mt-4 min-h-24 text-sm leading-7 text-muted-foreground">{interest.description}</p>
             <div className="mt-7 flex flex-wrap gap-2">
               {interest.topics.map((topic) => <span className="topic-chip" key={topic}>{topic}</span>)}
