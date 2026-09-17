@@ -54,8 +54,8 @@ export const portfolioData = {
       },
       {
         icon: "target" as IconName,
-        label: "Interested In",
-        value: "AI/ML research opportunities and academic internships",
+        label: "Looking For",
+        value: "Academic research opportunities and internships",
       },
     ],
   },
