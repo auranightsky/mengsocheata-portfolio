@@ -153,7 +153,7 @@ function Hero() {
             alt=""
             className="aspect-[6/5] w-full object-cover"
             width="1200"
-            height="1000"
+            height="1008"
             fetchPriority="high"
           />
           <div className="absolute inset-x-5 bottom-5 flex items-center justify-between rounded-lg border border-border/70 bg-surface-frosted px-4 py-3 backdrop-blur-md">
